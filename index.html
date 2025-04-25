@@ -191,6 +191,70 @@ a.link-internal:hover {
   color: #ffffff;
   text-shadow: 0 0 5px #c9afff;
 }
+
+/* ✅ 更现代的 SugarCube UI.alert 弹窗样式美化 */
+
+#ui-dialog-body {
+  font-size: 1.05em;
+  line-height: 1.6;
+  color: #f8f8f8;
+  background: #111;
+  border-radius: 18px;
+  border: none;
+  padding: 2em 2.5em;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(208, 191, 255, 0.25);
+  max-width: 580px;
+  margin: auto;
+}
+
+/* ⬆ 顶部标题栏（ALERT） */
+#ui-dialog-titlebar {
+  background: transparent;
+  font-size: 1.6em;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  border-bottom: none;
+  padding: 0.8em 0 0;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+/* ❌ 右上角关闭按钮 */
+#ui-dialog-close {
+  color: #aaa;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+#ui-dialog-close:hover {
+  color: #fff;
+  text-shadow: 0 0 6px #c9afff;
+}
+
+/* ✅ OK按钮美化 */
+#ui-dialog-body button {
+  font-size: 1em;
+  padding: 0.4em 1.4em;
+  margin-top: 2em;
+  background: linear-gradient(135deg, #86e3ce, #d0bfff);
+  border: none;
+  border-radius: 999px;
+  color: #111;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+#ui-dialog-body button:hover {
+  background: linear-gradient(135deg, #bdafff, #a0e3ce);
+  transform: scale(1.06);
+  color: #000;
+}
+
+/* 📦 让弹窗不那么大 */
+.ui-dialog {
+  max-width: 600px;
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="" position="550,475" size="100,100">Welcome to Pure Haven — a sterile island paradise where cleanliness is everything.
 You arrive at the dock, where a voice from the speaker welcomes you:
 
@@ -235,7 +299,8 @@ Task: Wipe your entire body using the prescribed disinfectant wipes.&lt;&lt;set 
 You feel clean and slightly relieved.
 
 [[Proceed to Day 2-&gt;Day2_1_Clean]]
-</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="" position="600,350" size="100,100">&lt;div id=&quot;floating-status-bar&quot;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="" position="600,350" size="100,100">&lt;!-- 顶部浮动状态栏 --&gt;
+&lt;div id=&quot;floating-status-bar&quot;&gt;
   &lt;div class=&quot;top-bar-left&quot;&gt;
     &lt;span class=&quot;stat-pill&quot;&gt;Day: $day&lt;/span&gt;
     &lt;span class=&quot;stat-pill&quot;&gt;Anxiety: $anxiety&lt;/span&gt;
@@ -246,31 +311,30 @@ You feel clean and slightly relieved.
       &lt;span class=&quot;stat-pill&quot;&gt;Bad: $badBacteria&lt;/span&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;/div&gt;
+
   &lt;div class=&quot;top-bar-right&quot;&gt;
     &lt;&lt;if $hasMagnifier&gt;&gt;
-      &lt;span class=&quot;tool-link&quot;&gt;
-        🧪
-        &lt;&lt;link &quot;Magnifier&quot;&gt;&gt;
-          &lt;&lt;if $goodBacteria is undefined&gt;&gt;
-            &lt;&lt;if $cleanliness &gt;= 6&gt;&gt;
-              &lt;&lt;run UI.alert(&quot;✨ It looks fairly clean, barely any bacteria visible.&quot;)&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;&lt;if $cleanliness &lt; 6&gt;&gt;
-              &lt;&lt;run UI.alert(&quot;😱 It&#39;s crawling with bacteria — way more than you expected!&quot;)&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
-          &lt;&lt;/if&gt;&gt;
-          &lt;&lt;if $goodBacteria is not undefined&gt;&gt;
-            &lt;&lt;run UI.alert(&quot;🧫 Good Bacteria: &quot; + $goodBacteria + &quot;\n🦠 Bad Bacteria: &quot; + $badBacteria + &quot;\nThey’re fighting — and you’re the battlefield.&quot;)&gt;&gt;
-          &lt;&lt;/if&gt;&gt;
-        &lt;&lt;/link&gt;&gt;
-      &lt;/span&gt;
-    &lt;&lt;/if&gt;&gt;
+&lt;div style=&quot;text-align:center; margin-bottom:1em;&quot;&gt;
+&lt;&lt;link &quot;🧪 Magnifier &quot;&gt;&gt;
+	&lt;&lt;if $goodBacteria is undefined&gt;&gt;
+		&lt;&lt;if $cleanliness &gt;= 6&gt;&gt;
+			&lt;&lt;run UI.alert(&quot;✨ It looks fairly clean, barely any bacteria visible.&quot;)&gt;&gt;
+		&lt;&lt;else&gt;&gt;
+			&lt;&lt;run UI.alert(&quot;😱 It&#39;s crawling with bacteria — way more than you expected!&quot;)&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;run UI.alert(&quot;🧫 Good Bacteria: &quot; + $goodBacteria + &quot;\n🦠 Bad Bacteria: &quot; + $badBacteria + &quot;\nThey’re fighting — and you’re the battlefield.&quot;)&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
+
     &lt;&lt;if $hasMeditation&gt;&gt;
-      &lt;span class=&quot;tool-link&quot;&gt;
-        🧘
-        &lt;&lt;set $lastPage = passage()&gt;&gt;
-        [[Meditate-&gt;Meditation_Free]]
-      &lt;/span&gt;
+    &lt;span class=&quot;tool-link&quot;&gt;
+      🧘
+      &lt;&lt;set $lastPage = passage()&gt;&gt;
+      [[Meditate-&gt;Meditation_Free]]
+    &lt;/span&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;/div&gt;
 &lt;/div&gt;
